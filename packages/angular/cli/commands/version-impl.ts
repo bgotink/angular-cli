@@ -51,7 +51,7 @@ export class VersionCommand extends Command<VersionCommandSchema> {
       ...Object.keys((projPkg && projPkg['devDependencies']) || {}),
     ];
 
-    if (packageRoot != null) {
+    if (packageRoot != null && fs.existsSync(packageRoot)) {
       // Add all node_modules and node_modules/@*/*
       const nodePackageNames = fs.readdirSync(packageRoot).reduce<string[]>((acc, name) => {
         if (name.startsWith('@')) {
